@@ -6,7 +6,7 @@ import {
   FindingType,
 } from "forta-agent"
 
-import {NETHERMIND_BOT_DEPLOYER, AGENTS_PROXY, FUNCTION_SIGNATURE} from './utils'
+import {NETHERMIND_BOT_DEPLOYER, BOTS_PROXY, FUNCTION_SIGNATURE} from './utils'
 
 
 export function provideHandleTransaction(deployer: string, proxy: string, signature: string): HandleTransaction{
@@ -47,5 +47,5 @@ export function provideHandleTransaction(deployer: string, proxy: string, signat
 }
 
 export default {
-  handleTransaction: provideHandleTransaction(NETHERMIND_BOT_DEPLOYER, AGENTS_PROXY, FUNCTION_SIGNATURE),
+  handleTransaction: provideHandleTransaction(NETHERMIND_BOT_DEPLOYER, BOTS_PROXY, FUNCTION_SIGNATURE),
 };

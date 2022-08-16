@@ -9,25 +9,25 @@ import { Interface} from "ethers/lib/utils";
 
 import { TestTransactionEvent } from "forta-agent-tools/lib/test";
 import { provideHandleTransaction } from "./agent";
-import { AGENTS_PROXY, FUNCTION_SIGNATURE, NETHERMIND_BOT_DEPLOYER } from "./utils";
+import { BOTS_PROXY, FUNCTION_SIGNATURE, NETHERMIND_BOT_DEPLOYER } from "./utils";
 
-describe("Bots deployment agent", () => {
+describe("Bots deployment", () => {
   let proxy = new Interface([FUNCTION_SIGNATURE])
 
   let handleTransaction: HandleTransaction
 
   beforeAll(() => {
-    handleTransaction = provideHandleTransaction(NETHERMIND_BOT_DEPLOYER, AGENTS_PROXY, FUNCTION_SIGNATURE)
+    handleTransaction = provideHandleTransaction(NETHERMIND_BOT_DEPLOYER, BOTS_PROXY, FUNCTION_SIGNATURE)
   })
 
   it("returns empty findings if FROM is not equal deployer", async () =>{
     let findings: Finding[]
     let txEvent: TestTransactionEvent
     txEvent = new TestTransactionEvent()
-      .setTo(AGENTS_PROXY)
+      .setTo(BOTS_PROXY)
       .setFrom("0x2477d97E71F7738d48e86aF5a107616F71F43263")
       .addTraces({
-        to: AGENTS_PROXY,
+        to: BOTS_PROXY,
         function: proxy.getFunction("createAgent"),
         arguments: [123456, "0x2477d97E71F7738d48e86aF5a107616F71F43263", "QmXGC4eWXjShzXs9T3nUvrYTTPqLQCEfArHfuSLSCagE2E", [56]]
       })
@@ -64,10 +64,10 @@ describe("Bots deployment agent", () => {
     let findings: Finding[]
     let txEvent: TestTransactionEvent
     txEvent = new TestTransactionEvent()
-      .setTo(AGENTS_PROXY)
+      .setTo(BOTS_PROXY)
       .setFrom(NETHERMIND_BOT_DEPLOYER)
       .addTraces({
-        to: AGENTS_PROXY,
+        to: BOTS_PROXY,
         function: proxy.getFunction("createAgent"),
         arguments: [123456, "0x2477d97E71F7738d48e86aF5a107616F71F43263", "QmXGC4eWXjShzXs9T3nUvrYTTPqLQCEfArHfuSLSCagE2E", [56]]
       })

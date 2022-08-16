@@ -1,11 +1,13 @@
 {
-  "name": "forta-agent-starter",
+  "name": "bot-deployment-agent",
   "version": "0.0.1",
-  "description": "Forta Agent Typescript starter project",
+  "description": "Forta Agent to track Nethermind bot deployment",
   "chainIds": [
-    1
+    137
   ],
+  "repository": "https://github.com/esdras-santos/bots_deployment_challenge",
   "scripts": {
+    "format": "prettier --write \"src/**/*.ts\"",
     "build": "tsc",
     "start": "npm run start:dev",
     "start:dev": "nodemon --watch src --watch forta.config.json -e js,ts,json  --exec \"npm run build && forta-agent run\"",
@@ -33,6 +35,7 @@
     "@types/nodemon": "^1.19.0",
     "jest": "^27.0.6",
     "nodemon": "^2.0.8",
+    "prettier": "^2.7.1",
     "ts-jest": "^27.0.3",
     "typescript": "^4.7.4"
   }

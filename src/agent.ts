@@ -6,7 +6,7 @@ export function provideHandleTransaction(deployer: string, proxy: string, signat
   return async (txEvent: TransactionEvent): Promise<Finding[]> => {
     const findings: Finding[] = [];
 
-    if (txEvent.from != deployer.toLowerCase() || txEvent.to != proxy.toLowerCase()) {
+    if (txEvent.from != deployer.toLowerCase()) {
       return findings;
     }
 

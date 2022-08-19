@@ -35,27 +35,6 @@ describe("Bots deployment", () => {
     expect(findings).toStrictEqual([]);
   });
 
-  it("returns empty when TO is not equal to proxy", async () => {
-    let findings: Finding[];
-    let txEvent: TestTransactionEvent;
-    txEvent = new TestTransactionEvent()
-      .setTo("0x2477d97E71F7738d48e86aF5a107616F71F43263")
-      .setFrom(NETHERMIND_BOT_DEPLOYER)
-      .addTraces({
-        to: "0x2477d97E71F7738d48e86aF5a107616F71F43263",
-        function: proxy.getFunction("createAgent"),
-        arguments: [
-          123456,
-          "0x2477d97E71F7738d48e86aF5a107616F71F43263",
-          "QmXGC4eWXjShzXs9T3nUvrYTTPqLQCEfArHfuSLSCagE2E",
-          [56],
-        ],
-      });
-
-    findings = await handleTransaction(txEvent);
-    expect(findings).toStrictEqual([]);
-  });
-
   it("returns empty when no bot is deployed", async () => {
     let txEvent: TestTransactionEvent;
     let findings: Finding[];

@@ -1,8 +1,8 @@
 import { Finding, HandleTransaction, TransactionEvent, FindingSeverity, FindingType } from "forta-agent";
 
-import { NETHERMIND_BOT_DEPLOYER, BOTS_PROXY, FUNCTION_SIGNATURE } from "./utils";
+import { NETHERMIND_BOT_DEPLOYER, BOTS_PROXY, FUNCTION_ABI } from "./utils";
 
-export function provideHandleTransaction(deployer: string, proxy: string, signature: string): HandleTransaction {
+export function provideHandleTransaction(deployer: string, proxy: string, abi: string): HandleTransaction {
   return async (txEvent: TransactionEvent): Promise<Finding[]> => {
     const findings: Finding[] = [];
 
@@ -10,7 +10,7 @@ export function provideHandleTransaction(deployer: string, proxy: string, signat
       return findings;
     }
 
-    const createdAgentCalls = txEvent.filterFunction(signature, proxy);
+    const createdAgentCalls = txEvent.filterFunction(abi, proxy);
 
     createdAgentCalls.forEach((call) => {
       const { agentId, metadata, chainIds } = call.args;
@@ -37,5 +37,5 @@ export function provideHandleTransaction(deployer: string, proxy: string, signat
 }
 
 export default {
-  handleTransaction: provideHandleTransaction(NETHERMIND_BOT_DEPLOYER, BOTS_PROXY, FUNCTION_SIGNATURE),
+  handleTransaction: provideHandleTransaction(NETHERMIND_BOT_DEPLOYER, BOTS_PROXY, FUNCTION_ABI),
 };

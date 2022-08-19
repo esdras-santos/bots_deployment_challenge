@@ -3,15 +3,15 @@ import { Interface } from "ethers/lib/utils";
 
 import { TestTransactionEvent } from "forta-agent-tools/lib/test";
 import { provideHandleTransaction } from "./agent";
-import { BOTS_PROXY, FUNCTION_SIGNATURE, NETHERMIND_BOT_DEPLOYER } from "./utils";
+import { BOTS_PROXY, FUNCTION_ABI, NETHERMIND_BOT_DEPLOYER } from "./utils";
 
 describe("Bots deployment", () => {
-  let proxy = new Interface([FUNCTION_SIGNATURE]);
+  let proxy = new Interface([FUNCTION_ABI]);
 
   let handleTransaction: HandleTransaction;
 
   beforeAll(() => {
-    handleTransaction = provideHandleTransaction(NETHERMIND_BOT_DEPLOYER, BOTS_PROXY, FUNCTION_SIGNATURE);
+    handleTransaction = provideHandleTransaction(NETHERMIND_BOT_DEPLOYER, BOTS_PROXY, FUNCTION_ABI);
   });
 
   it("returns empty findings if FROM is not equal deployer", async () => {
